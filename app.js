@@ -1,34 +1,20 @@
 import express from "express";
 import authRouter from "./routes/auth.routes.js"
-
+import { PORT } from "./config/env.js"
+import UserRouter from "./routes/user.routes.js"
 const app = express();
 
-const PORT = process.env.PORT || 3000
+//const PORT = process.env.PORT || 3000
 app.use("/api/v1/auth", authRouter);
-
-
+app.use("/api/v1/user", UserRouter);
 app.get("/api/users", (req, res) => {
   res.send("<h1>Hello, Express.js Server!</h1>");
 });
  
-let port = PORT;
-
-app.listen(port, () => {
-  console.log(`listening start at ${port}`);
+//let port = PORT;
+app.listen(PORT, () => {
+  console.log(`listening start at ${PORT}`);
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
