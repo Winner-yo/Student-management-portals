@@ -4,11 +4,21 @@ import authRouter from "./routes/auth.routes.js"
 import { PORT } from "./config/env.js"
 import UserRouter from "./routes/user.routes.js"
 import connectToDatabase from "./database/mongodb.js";
+import errorMiddleware from "./middleware/error.middleware.js";
+
 const app = express();
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+app.use(cookieParser());
 
 //const PORT = process.env.PORT || 3000
 app.use("/api/v1/auth", authRouter);
 app.use("/api/v1/user", UserRouter);
+
+app.use(errorMiddleware);
+
+
 app.get("/api/users", (req, res) => {
   
   res.send("<h1>Hello, Express.js Server!</h1>");
